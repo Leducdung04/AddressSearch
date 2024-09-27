@@ -1,20 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import Wellcome from './src/screens/Wellcome';
+import AddressSearchScreen from './src/screens/AddressSearchScreen';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [showWelcome, setShowWelcome] = useState(true);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowWelcome(false); 
+    }, 2000);
+    return () => clearTimeout(timer); 
+  }, []);
+  return showWelcome ? <Wellcome /> : <AddressSearchScreen />; 
+}
